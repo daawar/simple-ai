@@ -89,11 +89,11 @@ class Value:
 
 
 # test code below
-a = Value(1.0)
-b = Value(2.0)
-c = a + b  # (a, b) -+-> c
-d = Value(4.0)
-e = d * c * 0.5  # (d, c) -*-> e
-print(e)
+# a = Value(1.0)
+# b = Value(2.0)
+# c = a + b  # (a, b) -+-> c
+# d = Value(4.0)
+# e = d * c * 0.5  # (d, c) -*-> e
+# print(e)
 
-e.backward
+# e.backward

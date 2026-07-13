@@ -37,36 +37,42 @@ def build_display_graph(root):
     return g
 
 
+def display(root):
+    g = build_display_graph(root)
+    g.render("gout")
+    pass
+
+
 # test nodes builder
 
-a = Value(1.0)
-b = Value(2.0)
-c = a + b  # (a, b) -+-> c
-d = Value(4.0)
-e = d * c * 0.5  # (d, c) -*-> e
-print(e)
+# a = Value(1.0)
+# b = Value(2.0)
+# c = a + b  # (a, b) -+-> c
+# d = Value(4.0)
+# e = d * c * 0.5  # (d, c) -*-> e
+# print(e)
 
-e.backward()
+# e.backward()
 
-# g = build_display_graph(e)
+# # g = build_display_graph(e)
+# # g.render("gout")
+
+# # neuron mimic - using activation function tanh
+# w1 = Value(0.5)
+# x1 = Value(2.0)
+# w2 = Value(0.3)
+# x2 = Value(5.0)
+# b = Value(0.634846)
+
+# f = w1 * x1 + w2 * x2 + b
+# print(f)
+
+# # use activation function
+# h = f.tanh()
+# print(h)
+
+# # backpropagate updating gradients on the way back
+# h.backward()
+
+# g = build_display_graph(h)
 # g.render("gout")
-
-# neuron mimic - using activation function tanh
-w1 = Value(0.5)
-x1 = Value(2.0)
-w2 = Value(0.3)
-x2 = Value(5.0)
-b = Value(0.634846)
-
-f = w1 * x1 + w2 * x2 + b
-print(f)
-
-# use activation function
-h = f.tanh()
-print(h)
-
-# backpropagate updating gradients on the way back
-h.backward()
-
-g = build_display_graph(h)
-g.render("gout")
