@@ -29,6 +29,9 @@ class Value:
 
         out._backward = _backward  ##TODO understand this lamba assignment
         return out
+    
+    def __sub__(self, other):
+        return self + (-other)
 
     def __mul__(self, other):
         assert isinstance(other, Value) or isinstance(other, (int, float)), (
