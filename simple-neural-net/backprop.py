@@ -1,5 +1,5 @@
 import math
-
+import graph
 
 class Value:
     def __init__(self, data, _children=(), _op=""):
@@ -30,8 +30,17 @@ class Value:
         out._backward = _backward  ##TODO understand this lamba assignment
         return out
     
+    def __radd__(self, other): # other + self
+        return self + other
+    
+    def __neg__(self):
+        return self * -1
+    
     def __sub__(self, other):
         return self + (-other)
+    
+    def __rsub__(self, other):
+        return other + (-self)
 
     def __mul__(self, other):
         assert isinstance(other, Value) or isinstance(other, (int, float)), (
@@ -52,11 +61,15 @@ class Value:
         out._backward = _backward  ##TODO understand this lamba assignment
         return out
 
-    # def __pow__(self, other):
-    #     assert isinstance(other, (int, float)), 'only int or float exponents allowed'
-    #     out = Value(self.data ** other, (self, other))
+    def __pow__(self, other):
+        assert isinstance(other, (int, float)), 'only int or float exponents allowed'
+        out = Value(self.data ** other, (self,), f"**{other}")
 
-    #     return out
+        def _backward():
+            self.grad = other * (self.data ** (other-1)) * out.grad
+        
+        out._backward = _backward
+        return out
 
     def tanh(self):
         x = self.data
@@ -99,4 +112,8 @@ class Value:
 # e = d * c * 0.5  # (d, c) -*-> e
 # print(e)
 
+# c = b ** 2.0
+
 # e.backward
+
+

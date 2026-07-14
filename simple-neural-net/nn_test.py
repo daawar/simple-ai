@@ -15,7 +15,22 @@ print(ypred)
 # TODO implement power function for Value class, for now using math.pow
 # loss = sum(((ypred[0][i] - ys[i]) ** 2) for i in range(len(ys)))
 
+loss = sum((yactual - ypredicted)**2 for ypredicted, yactual in zip(ypred, ys))
 
-loss = sum(math.pow((ypred[i][0] - ys[i]).data, 2.0) for i in range(len(ys)))
 
+# loss = sum(math.pow((ypred[i][0] - ys[i][0]).data, 2.0) for i in range(len(ys)))
 print(loss)
+
+# display(loss)
+
+#training (adjust weights and biases to minimize loss)
+# print(mlp.layers[0].neurons[0].w[0].grad)
+
+
+#backpropagate and calculate all gradients
+loss.backward()
+
+display(loss)
+
+# #training (adjust weights and biases to minimize loss)
+# print(mlp.layers[0].neurons[0].w[0].grad)

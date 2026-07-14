@@ -21,7 +21,10 @@ class Layer:
         self.neurons = [Neuron(nin) for _ in range(nout)]
 
     def __call__(self, x):
-        return [n(x) for n in self.neurons]
+        outs = [n(x) for n in self.neurons]
+
+        # not doing this step was giving a headache bug where Values in ypred are all list types
+        return outs[0] if len(outs) == 1 else outs
 
 
 class MLP:
@@ -56,7 +59,7 @@ m = MLP(a, b)
 mout = m(x)
 # print(mout[0])
 
-h = mout[0].tanh()
+h = mout.tanh()
 print(h)
 
 h.backward()
