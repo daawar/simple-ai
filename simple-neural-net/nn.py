@@ -12,7 +12,8 @@ class Neuron:
         assert isinstance(x, list), "input x should be a python array/list"
         z = list(zip(self.w, x))
         out = sum((wi * xi for wi, xi in z), self.b)
-        return out
+        h = out.tanh() 
+        return h
 
 
 class Layer:
