@@ -12,8 +12,11 @@ class Neuron:
         assert isinstance(x, list), "input x should be a python array/list"
         z = list(zip(self.w, x))
         out = sum((wi * xi for wi, xi in z), self.b)
-        h = out.tanh() 
+        h = out.tanh()
         return h
+
+    def parameters(self):
+        return self.w + [self.b]
 
 
 class Layer:
@@ -26,6 +29,12 @@ class Layer:
         # not doing this step was giving a headache bug where Values in ypred are all list types
         return outs[0] if len(outs) == 1 else outs
 
+    def parameters(self):
+        params = []
+        for neuron in self.neurons:
+            params.extend(neuron.parameters())
+        return params
+
 
 class MLP:
     def __init__(self, nin, nouts):
@@ -37,6 +46,12 @@ class MLP:
         for layer in self.layers:
             x = layer(x)
         return x
+
+    def parameters(self):
+        params = []
+        for layer in self.layers:
+            params.extend(layer.parameters())
+        return params
 
 
 # Neuron test code
